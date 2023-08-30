@@ -58,6 +58,7 @@ final class CKEditorInstallerCommand extends Command
                 InputOption::VALUE_OPTIONAL,
                 'CKEditor custom build ID'
             )
+           /*
             ->addOption('tag', null, InputOption::VALUE_OPTIONAL, 'CKEditor tag (x.y.z or latest)')
             ->addOption(
                 'clear',
@@ -65,6 +66,7 @@ final class CKEditorInstallerCommand extends Command
                 InputOption::VALUE_OPTIONAL,
                 'How to clear previous CKEditor installation (drop, keep or skip)'
             )
+           */
             ->addOption(
                 'exclude',
                 null,
@@ -131,6 +133,7 @@ EOF
     private function createOptions(InputInterface $input, OutputInterface $output): array
     {
         $options = ['notifier' => $this->createNotifier($input, $output)];
+        $options['version'] = '4.22.1';
 
         if ($input->hasArgument('path')) {
             $options['path'] = $input->getArgument('path');
@@ -144,9 +147,11 @@ EOF
             $options['custom_build_id'] = $input->getOption('custom-build-id');
         }
 
+        /*
         if ($input->hasOption('tag')) {
             $options['version'] = $input->getOption('tag');
         }
+        */
 
         if ($input->hasOption('exclude')) {
             $options['excludes'] = $input->getOption('exclude');
